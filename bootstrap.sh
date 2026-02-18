@@ -8,7 +8,7 @@ apk --no-cache add nix
 nix profile add \
     nixpkgs#devenv \
     nixpkgs#direnv \
-    --profile /nix/var/nix/profiles/defaultdoc
+    --profile /nix/var/nix/profiles/default
 
 # Cleanup files and caches
 nix-collect-garbage -d
