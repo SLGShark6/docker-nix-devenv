@@ -19,8 +19,8 @@ jobs:
       run: echo "IMAGE_VERSION=$(jq -r '.version' meta.json)" >> $GITHUB_ENV
     - name: Build the Docker image
       run: |
-        docker build . /
-          --tag slgshark6/nix-devenv:$IMAGE_VERSION /
+        docker build . \
+          --tag slgshark6/nix-devenv:$IMAGE_VERSION \
           --tag slgshark6/nix-devenv:latest
     - name: Publish Docker image
       run: |
