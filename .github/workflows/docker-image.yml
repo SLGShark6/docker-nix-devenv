@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: Get Image Version
+      run: echo "IMAGE_VERSION=$(jq -r '.version' meta.json)" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: |
+        docker build . /
+          --tag slgshark6/nix-devenv:$IMAGE_VERSION /
+          --tag slgshark6/nix-devenv:latest
+    - name: Publish Docker image
+      run: |
+        docker login -u slgshark6 -p ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
+        docker push slgshark6/nix-devenv --all-tags
+           
