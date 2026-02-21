@@ -1,6 +1,7 @@
 FROM alpine:3.23.3
 
-ENV RESOURCES_DIR="/resources" \
+# Build time arguments
+ARG RESOURCES_DIR="/resources" \
     DEV_USER="dev"
 
 # Copy all resource files into the image to be used by the bootstrapper
