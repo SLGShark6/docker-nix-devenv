@@ -1,9 +1,19 @@
 FROM alpine:3.23.3
 
-ADD ./bootstrap.sh /tmp/
+ENV RESOURCES_DIR="/resources" \
+    DEV_USER="dev"
 
-ENV NIX_CONFIG="experimental-features = nix-command flakes"
+# Copy all resource files into the image to be used by the bootstrapper
+COPY ./resources/ /${RESOURCES_DIR}/
 
-RUN sh -e /tmp/bootstrap.sh
+# Run a full configuration script
+RUN sh -e /resources/bootstrap.sh
 
-ENV PATH="/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:${PATH}"
+# Shell Init script which will be evaluated when an intereactive shell is loaded
+ENV ENV="/etc/.shinit"
+
+# Login as non-root user
+USER ${DEV_USER}
+
+# By default start in the /workspace directory
+WORKDIR /workspace
