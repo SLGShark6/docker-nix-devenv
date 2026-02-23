@@ -18,8 +18,8 @@ nix profile add \
     --profile /nix/var/nix/profiles/default
 
 # Add a non-root group & user
-addgroup -S $DEV_USER
-adduser -S $DEV_USER -G $DEV_USER
+addgroup $DEV_USER
+adduser $DEV_USER --disabled-password -G $DEV_USER
 # Ensure the user is a part of the users that can use nix
 addgroup $DEV_USER nix
 
