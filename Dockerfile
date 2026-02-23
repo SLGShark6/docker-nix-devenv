@@ -2,6 +2,7 @@ FROM alpine:3.23.3
 
 # Build time arguments
 ARG RESOURCES_DIR="/resources" \
+    WORKING_DIR="/workspace" \
     DEV_USER="dev"
 
 # Copy all resource files into the image to be used by the bootstrapper
@@ -17,4 +18,4 @@ ENV ENV="/etc/.shinit"
 USER ${DEV_USER}
 
 # By default start in the /workspace directory
-WORKDIR /workspace
+WORKDIR ${WORKING_DIR}
