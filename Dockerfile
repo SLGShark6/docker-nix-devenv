@@ -19,3 +19,9 @@ USER ${DEV_USER}
 
 # By default start in the /workspace directory
 WORKDIR ${WORKING_DIR}
+
+LABEL devcontainer.metadata="[{ \
+  \"remoteUser\": \"${DEV_USER}\", \
+  \"workspaceFolder\": \"${WORKING_DIR}\", \
+  \"postCreateCommand\": \"direnv exec . sh\" \
+}]"
