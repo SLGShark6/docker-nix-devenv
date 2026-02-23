@@ -27,8 +27,8 @@ addgroup $DEV_USER nix
 dev_home=$(getent passwd $DEV_USER | cut -d: -f6)
 
 # Make a workspace directory to copy a project to
-mkdir /workspace
-chown $DEV_USER:$DEV_USER /workspace
+mkdir ${WORKING_DIR}
+chown $DEV_USER:$DEV_USER ${WORKING_DIR}
 
 # DEV_USER direnv config file destination
 direnv_config_dir=$dev_home/.config/direnv
