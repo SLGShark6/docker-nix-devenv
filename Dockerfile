@@ -24,6 +24,7 @@ WORKDIR ${WORKING_DIR}
 # Default Script executed at startup (can be overridden)
 CMD ["/resources/startup-command.sh"]
 
+# Dev container configuration
 LABEL devcontainer.metadata="[{ \
   \"remoteUser\": \"${DEV_USER}\", \
   \"workspaceFolder\": \"${WORKING_DIR}\", \
