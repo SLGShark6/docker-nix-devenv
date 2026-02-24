@@ -1,7 +1,7 @@
 #! /bin/sh -e
 
 # Move the shell initializer into place
-mv /$RESOURCES_DIR/.shinit /etc/.shinit
+mv $RESOURCES_DIR/.shinit /etc/.shinit
 # Evaluate the shell init so everything is available going forward
 source /etc/.shinit
 
@@ -9,7 +9,7 @@ source /etc/.shinit
 # automatically
 apk --no-cache add nix
 # Overwrite the default config with the one contained in the resources
-mv /$RESOURCES_DIR/nix.conf /etc/nix/nix.conf
+mv $RESOURCES_DIR/nix.conf /etc/nix/nix.conf
 
 # Using nix install devenv and direnv
 nix profile add \
@@ -27,15 +27,15 @@ addgroup $DEV_USER nix
 dev_home=$(getent passwd $DEV_USER | cut -d: -f6)
 
 # Make a workspace directory to copy a project to
-mkdir ${WORKING_DIR}
-chown $DEV_USER:$DEV_USER ${WORKING_DIR}
+mkdir $WORKING_DIR
+chown $DEV_USER:$DEV_USER $WORKING_DIR
 
 # DEV_USER direnv config file destination
 direnv_config_dir=$dev_home/.config/direnv
 # Ensure direnv config directory is created
 mkdir -p $direnv_config_dir
 # Move the direnv config to whitelist the /workspace directory by default
-mv /$RESOURCES_DIR/direnv.toml $direnv_config_dir/direnv.toml
+mv $RESOURCES_DIR/direnv.toml $direnv_config_dir/direnv.toml
 # Ensure that the file is owned by the DEV_USER
 chown -R $DEV_USER:$DEV_USER $dev_home
 

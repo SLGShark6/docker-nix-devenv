@@ -1,13 +1,13 @@
 FROM alpine:3.23.3
 
-# Build time arguments
+# Cross script environment variables
 ENV RESOURCES_DIR="/resources" \
-    STARTUP_SCRIPT="${RESOURCES_DIR}/startup-command.sh" \
     WORKING_DIR="/workspace" \
     DEV_USER="dev"
+ENV STARTUP_SCRIPT="${RESOURCES_DIR}/startup-command.sh"
 
 # Copy all resource files into the image to be used by the bootstrapper
-COPY ./resources/ /${RESOURCES_DIR}/
+COPY ./resources/ ${RESOURCES_DIR}/
 
 # Run a full configuration script
 RUN sh -e /resources/bootstrap.sh
