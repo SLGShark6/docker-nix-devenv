@@ -1,11 +1,13 @@
 FROM alpine:3.23.3
 
-# Build time arguments
-ARG RESOURCES_DIR="/resources" \
+# Cross script environment variables
+ENV RESOURCES_DIR="/resources" \
+    WORKING_DIR="/workspace" \
     DEV_USER="dev"
+ENV STARTUP_SCRIPT="${RESOURCES_DIR}/startup-command.sh"
 
 # Copy all resource files into the image to be used by the bootstrapper
-COPY ./resources/ /${RESOURCES_DIR}/
+COPY ./resources/ ${RESOURCES_DIR}/
 
 # Run a full configuration script
 RUN sh -e /resources/bootstrap.sh
@@ -17,4 +19,13 @@ ENV ENV="/etc/.shinit"
 USER ${DEV_USER}
 
 # By default start in the /workspace directory
-WORKDIR /workspace
+WORKDIR ${WORKING_DIR}
+
+# Default Script executed at startup (can be overridden)
+CMD ["/resources/startup-command.sh"]
+
+# Dev container configuration
+LABEL devcontainer.metadata="[{ \
+  \"remoteUser\": \"${DEV_USER}\", \
+  \"workspaceFolder\": \"${WORKING_DIR}\", \
+}]"
