@@ -51,5 +51,9 @@ chown -R $DEV_USER:$DEV_USER /nix
 # Ensure the nix config is also editable by the dev user
 chown $DEV_USER:$DEV_USER /etc/nix/nix.conf
 
-# Finally remove any remaining resources
-rm -rf /$RESOURCES_DIR
+# Ensure the default startup command is owned and executable
+chown $DEV_USER:$DEV_USER $STARTUP_SCRIPT
+chmod +x $STARTUP_SCRIPT
+
+# Finally remove this script from resources
+rm -rf $RESOURCES_DIR/bootstrap.sh

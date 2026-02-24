@@ -1,7 +1,8 @@
 FROM alpine:3.23.3
 
 # Build time arguments
-ARG RESOURCES_DIR="/resources" \
+ENV RESOURCES_DIR="/resources" \
+    STARTUP_SCRIPT="${RESOURCES_DIR}/startup-command.sh" \
     WORKING_DIR="/workspace" \
     DEV_USER="dev"
 
@@ -20,8 +21,10 @@ USER ${DEV_USER}
 # By default start in the /workspace directory
 WORKDIR ${WORKING_DIR}
 
+# Default Script executed at startup (can be overridden)
+CMD ["/resources/startup-command.sh"]
+
 LABEL devcontainer.metadata="[{ \
   \"remoteUser\": \"${DEV_USER}\", \
   \"workspaceFolder\": \"${WORKING_DIR}\", \
-  \"postCreateCommand\": \"direnv exec . sh\" \
 }]"
