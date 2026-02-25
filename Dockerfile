@@ -2,8 +2,7 @@ FROM alpine:3.23.3
 
 # Cross script environment variables
 ENV DEV_USER="dev" \
-    PATH="/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:$PATH" \
-    NIX_CONFIG="experimental-features = nix-command flakes"
+    PATH="/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:$PATH"
 
 # Named directory paths
 ENV RESOURCES_DIR="/resources" \
