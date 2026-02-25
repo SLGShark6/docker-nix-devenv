@@ -7,5 +7,5 @@ source $ENV
 direnv allow $(pwd)
 eval "$(direnv export bash)" # Also makes bash available
 
-# Replace the current shell with the now available bash
-exec bash
+# Passthrough any passed CMD
+exec "$@"

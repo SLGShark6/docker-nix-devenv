@@ -22,7 +22,7 @@ USER ${DEV_USER}
 WORKDIR ${WORKING_DIR}
 
 # Default Script executed at startup (can be overridden)
-CMD ["/resources/startup-command.sh"]
+ENTRYPOINT ["/resources/entrypoint.sh"]
 
 # Dev container configuration
 LABEL devcontainer.metadata="[{ \
