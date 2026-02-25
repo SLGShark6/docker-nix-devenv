@@ -23,21 +23,9 @@ adduser $DEV_USER --disabled-password -G $DEV_USER
 # Ensure the user is a part of the users that can use nix
 addgroup $DEV_USER nix
 
-# Get the DEV_USER home directory
-dev_home=$(getent passwd $DEV_USER | cut -d: -f6)
-
 # Make a workspace directory to copy a project to
 mkdir $WORKING_DIR
 chown $DEV_USER:$DEV_USER $WORKING_DIR
-
-# DEV_USER direnv config file destination
-direnv_config_dir=$dev_home/.config/direnv
-# Ensure direnv config directory is created
-mkdir -p $direnv_config_dir
-# Move the direnv config to whitelist the /workspace directory by default
-mv $RESOURCES_DIR/direnv.toml $direnv_config_dir/direnv.toml
-# Ensure that the file is owned by the DEV_USER
-chown -R $DEV_USER:$DEV_USER $dev_home
 
 # Cleanup files and caches
 nix-collect-garbage -d
