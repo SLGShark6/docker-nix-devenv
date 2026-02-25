@@ -1,15 +1,15 @@
 #! /bin/sh -e
 
 # Move the shell initializer into place
-mv $RESOURCES_DIR/.shinit /etc/.shinit
+mv $RESOURCES_DIR/$SHELL_INIT_FILE $SHELL_INIT_PATH
 # Evaluate the shell init so everything is available going forward
-source /etc/.shinit
+source $SHELL_INIT_PATH
 
 # Install Nix Package Manager, with latest all hookups should happen
 # automatically
 apk --no-cache add nix
 # Overwrite the default config with the one contained in the resources
-mv $RESOURCES_DIR/nix.conf /etc/nix/nix.conf
+mv $RESOURCES_DIR/$NIX_CONFIG_FILE $NIX_CONFIG_PATH
 
 # Using nix install devenv and direnv
 nix profile add \
@@ -37,11 +37,11 @@ rm -rf /root/.cache/nix/*
 # to run in single-user mode
 chown -R $DEV_USER:$DEV_USER /nix
 # Ensure the nix config is also editable by the dev user
-chown $DEV_USER:$DEV_USER /etc/nix/nix.conf
+chown $DEV_USER:$DEV_USER $NIX_CONFIG_PATH
 
 # Ensure the default startup command is owned and executable
-chown $DEV_USER:$DEV_USER $STARTUP_SCRIPT
-chmod +x $STARTUP_SCRIPT
+chown $DEV_USER:$DEV_USER $STARTUP_SCRIPT_PATH
+chmod +x $STARTUP_SCRIPT_PATH
 
 # Finally remove this script from resources
-rm -rf $RESOURCES_DIR/bootstrap.sh
+rm -rf $CONFIGURATION_FILE_PATH
