@@ -44,4 +44,4 @@ chown $DEV_USER:$DEV_USER $STARTUP_SCRIPT_PATH
 chmod +x $STARTUP_SCRIPT_PATH
 
 # Finally remove this script from resources
-rm -rf $CONFIGURATION_FILE_PATH
+rm $CONFIGURATION_SCRIPT_PATH
