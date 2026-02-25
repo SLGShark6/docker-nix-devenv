@@ -15,11 +15,12 @@ mv $RESOURCES_DIR/$NIX_CONFIG_FILE $NIX_CONFIG_PATH
 nix profile add \
     nixpkgs#devenv \
     nixpkgs#direnv \
+    nixpkgs#bash \
     --profile /nix/var/nix/profiles/default
 
 # Add a non-root group & user
 addgroup $DEV_USER
-adduser $DEV_USER --disabled-password -G $DEV_USER
+adduser $DEV_USER --disabled-password -G $DEV_USER -s $(which bash)
 # Ensure the user is a part of the users that can use nix
 addgroup $DEV_USER nix
 
