@@ -12,7 +12,8 @@ ENV RESOURCES_DIR="/resources" \
 ENV CONFIGURATION_SCRIPT_FILE="bootstrap.sh" \
     STARTUP_SCRIPT_FILE="entrypoint.sh" \
     SHELL_INIT_FILE=".shinit" \
-    NIX_CONFIG_FILE="nix.conf"
+    NIX_CONFIG_FILE="nix.conf" \
+    BASH_PROFILE_FILE=".bashrc"
 
 # Final resting place of included resource files
 ENV CONFIGURATION_SCRIPT_PATH="${RESOURCES_DIR}/${CONFIGURATION_SCRIPT_FILE}" \ 
